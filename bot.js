@@ -10,7 +10,7 @@ process.on("unhandledRejection", (reason, p) => {
 
 var init = async function () {
   try {
-    var customWsProvider = new constants.ethers.providers.JsonRpcProvider(constants.wss);
+    var customWsProvider = new constants.ethers.providers.WebSocketProvider(constants.wss);
     const account = constants.wallet.connect(customWsProvider);
     const iface = new constants.ethers.utils.Interface([
       "function swapExactETHForTokens(uint256 amountOutMin, address[] path, address to, uint256 deadline)",
@@ -21,8 +21,8 @@ var init = async function () {
     customWsProvider.on("pending", async (tx) => {
       try {
         const transaction = await customWsProvider.getTransaction(tx);
-        
         if ((transaction && transaction.to === "0x10ED43C718714eb63d5aA57B78B54704E256024E") ) {
+          console.log(transaction)
           const value = constants.web3.utils.fromWei(transaction.value.toString());
 
           // Skip the transaction if the value is below MINVALUE
