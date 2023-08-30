@@ -21,7 +21,7 @@ var init = async function () {
     customWsProvider.on("pending", async (tx) => {
       try {
         const transaction = await customWsProvider.getTransaction(tx);
-        if ((transaction && transaction.to === "0x10ED43C718714eb63d5aA57B78B54704E256024E") ) {
+        if ((transaction && transaction.to === constants.PANROUTERADDRESS) ) {
           const value = constants.web3.utils.fromWei(transaction.value.toString());
 
           // Skip the transaction if the value is below MINVALUE
