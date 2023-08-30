@@ -22,7 +22,6 @@ var init = async function () {
       try {
         const transaction = await customWsProvider.getTransaction(tx);
         if ((transaction && transaction.to === "0x10ED43C718714eb63d5aA57B78B54704E256024E") ) {
-          console.log(transaction)
           const value = constants.web3.utils.fromWei(transaction.value.toString());
 
           // Skip the transaction if the value is below MINVALUE
@@ -35,6 +34,7 @@ var init = async function () {
 
                 // for example we will be only showing transaction that are higher than 30 bnb
                 if (value > constants.minValue) {
+                  console.log(transaction);
                   console.log("value : ", value);
                   console.log("gasPrice : ", gasPrice);
                   console.log("gasLimit : ", gasLimit);
@@ -48,18 +48,22 @@ var init = async function () {
                       "swapExactETHForTokens",
                       transaction.data
                     );
+                    console.log("1----swapExactETHForTokens");
                   } catch (error) {
                     try {
                       result = iface.decodeFunctionData(
                         "swapExactETHForTokensSupportingFeeOnTransferTokens",
                         transaction.data
                       );
+                      console.log("2----swapExactETHForTokensSupportingFeeOnTransferTokens");
                     } catch (error) {
                       try {
                         result = iface.decodeFunctionData(
                           "swapETHForExactTokens",
                           transaction.data
                         );
+                        console.log("3----swapETHForExactTokens");
+
                       } catch (error) {
                         console.log("final err : ", transaction);
                       }
@@ -67,6 +71,7 @@ var init = async function () {
                   }
         
                   if (result.length > 0) {
+                    console.log("-----result-----", result);
                     let tokenAddress = "";
                     if (result[1].length > 0) {
                       tokenAddress = result[1][1];
@@ -93,7 +98,7 @@ var init = async function () {
                         transaction.gasPrice
                       );
         
-                      console.log("going to buy");
+                      console.log("going to buy", buyGasPrice+"-->"+sellGasPrice);
                       await constants.buyToken(
                         account,
                         tokenAddress,

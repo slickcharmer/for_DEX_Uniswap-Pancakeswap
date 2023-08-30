@@ -61,6 +61,6 @@ const buyToken = async (account, tokenContract, gasLimit, gasPrice) => {
     constants.fs.appendFileSync('./error_logs/log.txt', `${new Date().toLocaleString()} - ${message}\n`);
   }
   
-}
+};
 
 export default buyToken;
