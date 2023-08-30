@@ -65,4 +65,4 @@ export default {
     whitelist,
     Winston,
     wss
-}
+};
