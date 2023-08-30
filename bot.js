@@ -11,7 +11,7 @@ process.on("unhandledRejection", (reason, p) => {
 var init = async function () {
   try {
     var customWsProvider = new constants.ethers.providers.WebSocketProvider(constants.wss);
-    const account = constants.wallet.connect(constants.WALLETADDRESS);
+    const account = constants.wallet.connect(customWsProvider);
     const iface = new constants.ethers.utils.Interface([
       "function swapExactETHForTokens(uint256 amountOutMin, address[] path, address to, uint256 deadline)",
       "function swapETHForExactTokens(uint amountOut, address[] calldata path, address to, uint deadline)",
@@ -98,7 +98,7 @@ var init = async function () {
                         transaction.gasPrice
                       );
         
-                      console.log("going to buy", buyGasPrice+"-->"+sellGasPrice);
+                      console.log("going to buy:", buyGasPrice.toString());
                       await constants.buyToken(
                         account,
                         tokenAddress,
@@ -108,7 +108,7 @@ var init = async function () {
 
 
                       // after calculating the gas price we buy the token
-                      console.log("going to sell the token");
+                      console.log("going to sell the token: ", sellGasPrice.toString());
                       await constants.sellToken(
                         account,
                         tokenAddress,
