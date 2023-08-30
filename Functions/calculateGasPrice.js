@@ -6,7 +6,7 @@ function calculate_gas_price(action, amount) {
     if (action === "buy") {
       const gasLimit = amount.add(constants.ethers.BigNumber.from("1000000000"));
       const percent = gasLimit.div(gasPercent);
-      return gasLimit.add(percent);
+      return gasLimit.add(percent)
     } else {
       const gasLimit = amount.sub(constants.ethers.BigNumber.from("1000000000"));
       const percent = gasLimit.div(gasPercent);
