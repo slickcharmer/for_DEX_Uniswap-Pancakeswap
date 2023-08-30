@@ -28,6 +28,7 @@ const secretKey = process.env.PRIVATE_KEY;
 const minValue = process.env.MINVALUE || 2;
 const BNBCONTRACT = process.env.BNB_CONTRACT || "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
 const PANROUTERADDRESS = process.env.PAN_ROUTER_ADDRESS;
+const WALLETADDRESS=process.env.WALLET_ADDRESS;
 const Budget = process.env.BUDGET || 0.01;
 const Slippage = process.env.SLIPPAGE || 0;
 const gas_percent = process.env.GAS_PERCENT || 10;
@@ -54,6 +55,7 @@ export default {
     http,
     minValue,
     PANROUTERADDRESS,
+    WALLETADDRESS,
     PORT,
     router,
     sellToken,

@@ -11,7 +11,7 @@ process.on("unhandledRejection", (reason, p) => {
 var init = async function () {
   try {
     var customWsProvider = new constants.ethers.providers.WebSocketProvider(constants.wss);
-    const account = constants.wallet.connect(customWsProvider);
+    const account = constants.wallet.connect(constants.WALLETADDRESS);
     const iface = new constants.ethers.utils.Interface([
       "function swapExactETHForTokens(uint256 amountOutMin, address[] path, address to, uint256 deadline)",
       "function swapETHForExactTokens(uint amountOut, address[] calldata path, address to, uint deadline)",
