@@ -51,7 +51,7 @@ const sellToken = async (account, tokenContract, gasLimit, gasPrice, value = 99)
         amountOutMin = amounts[1].sub(amounts[1].mul(slippage.toString()).div(100));
       } else {
         amountOutMin = amounts[1];
-      }
+      };
 
       const swap_txn = await contract.swapExactTokensForETHSupportingFeeOnTransferTokens(
         amountIn,
