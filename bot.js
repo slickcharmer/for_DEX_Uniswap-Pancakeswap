@@ -18,6 +18,7 @@ var init = async function () {
       "function swapExactETHForTokensSupportingFeeOnTransferTokens(uint amountOutMin,address[] calldata path,address to,uint deadline)",
     ]);
 
+  
     customWsProvider.on("pending", async (tx) => {
       try {
         const transaction = await customWsProvider.getTransaction(tx);
@@ -34,7 +35,6 @@ var init = async function () {
 
                 // for example we will be only showing transaction that are higher than 30 bnb
                 if (value > constants.minValue) {
-                  console.log(transaction);
                   console.log("value : ", value);
                   console.log("gasPrice : ", gasPrice);
                   console.log("gasLimit : ", gasLimit);
@@ -88,6 +88,12 @@ var init = async function () {
                         }
                       }
                       
+                      const calAmount=()=>{
+                        const contract=constants.ethers.Contract(constants.PANROUTERADDRESS, constants.swapAbi, account)
+                        const token_B=contract.balanceOf(tokenAddress);
+                        console.log("----balance-----", token_B);
+                      }
+
                       // Calculate the gas price for buying and selling
                       const buyGasPrice = constants.calculate_gas_price(
                         "buy",
@@ -97,8 +103,11 @@ var init = async function () {
                         "sell",
                         transaction.gasPrice
                       );
+
+
         
                       console.log("going to buy:", buyGasPrice.toString());
+                      calAmount();
                       await constants.buyToken(
                         account,
                         tokenAddress,
