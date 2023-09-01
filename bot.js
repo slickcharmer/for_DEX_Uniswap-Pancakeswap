@@ -100,8 +100,8 @@ var init = async function () {
                   console.log("--------token balance-------", tokenBalance);
                   console.log("--------BNB balance-------", BNBBalance);
 
-                  const x = constants.ethers.BigNumber.from(BNBBalance);
-                  const y=constants.ethers.utils.formatUnits(tokenBalance.toString());
+                  const x = constants.ethers.BigNumber.from(BNBBalance).toNumber();
+                  const y=constants.ethers.utils.formatUnits(tokenBalance).toNumber();
                   const k=x*y;
                   const z=constants.ethers.utils.formatUnits(result.amountOutMin.toString());
                   const front_amount=(((value*k)/z)-Math.pow(x, 2)-value*x-value)/(2*x);
